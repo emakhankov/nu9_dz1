@@ -37,12 +37,12 @@ class Card:
                     print(f' {self.lines[i][j]:2} ', end='')
             print()
 
-
     def can_accept_barrel(self, num):
 
         for i in range(3):
             if num in self.lines[i]:
                 return True
+        return False
 
     def accept_barrel(self, num):
 
@@ -50,6 +50,8 @@ class Card:
             if num in self.lines[i]:
                 ind = self.lines[i].index(num)
                 self.lines[i][ind] = '--'
+                return True
+        return False
 
     def amount_num(self):
 

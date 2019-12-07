@@ -20,5 +20,28 @@ class Bag:
 
         return len(self.barrels)
 
+    def __len__(self):
 
+        return len(self.barrels)
 
+    def __getitem__(self, item):
+
+        return sorted(list(self.barrels))[item]
+
+    def __eq__(self, other):
+
+        if isinstance(other, Bag):
+            return {barrel.get_num() for barrel in self} == {barrel.get_num() for barrel in other}
+        return False
+
+    def __ne__(self, other):
+
+        return not self.__eq__(other)
+
+    def __str__(self):
+
+        return ' '.join([str(b) for b in self.barrels]) if self.barrels else 'Пустой бочонок'
+
+    def __contains__(self, item):
+
+        return item.get_num() in {barrel.get_num() for barrel in self}

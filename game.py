@@ -36,7 +36,7 @@ def game(amount_player_human, amount_player_computer):
     bag = bg.Bag()
 
     print()
-    print('*** ПОЕХАЛАЛИ ***')
+    print('*** ПОЕХАЛИ ***')
     print()
 
     while True:

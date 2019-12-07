@@ -26,6 +26,19 @@ class MyTestCase(unittest.TestCase):
         test_bag = bag.Bag()
         self.assertTrue(isinstance(test_bag.barrels, set))
 
+    def test_bag_len(self):
+
+        test_bag = bag.Bag()
+        self.assertEqual(len(test_bag), 90)
+
+    def test_items(self):
+
+        test_bag = bag.Bag()
+        bags = set()
+        for b in test_bag:
+            bags.add(str(b))
+        self.assertEqual(len(bags), 90)
+
     def test_bag_get_barrel(self):
 
         test_bag = bag.Bag()
@@ -43,8 +56,33 @@ class MyTestCase(unittest.TestCase):
 
         test_bag = bag.Bag()
         for _ in range(90):
-            test_barrel = test_bag.get_barrel()
+            test_bag.get_barrel()
         self.assertTrue(test_bag.get_barrel() is None)
+
+    def test_bag_equal(self):
+
+        test_bag = bag.Bag()
+        test_bag2 = bag.Bag()
+        self.assertEqual(test_bag, test_bag2)
+        test_bag.get_barrel()
+        self.assertNotEqual(test_bag, test_bag2)
+        self.assertNotEqual(test_bag, 0)
+
+    def test_bag_str(self):
+
+        test_bag = bag.Bag()
+        self.assertGreater(str(test_bag).find('90'), -1)
+        for _ in range(90):
+            test_bag.get_barrel()
+        self.assertEqual(str(test_bag), 'Пустой бочонок')
+
+    def test_bag_contains(self):
+
+        test_bag = bag.Bag()
+        barrel90 = barrel.Barrel(90)
+        self.assertIn(barrel90, test_bag)
+        some_barrel = test_bag.get_barrel()
+        self.assertNotIn(some_barrel, test_bag)
 
     def test_card(self):
 
@@ -119,7 +157,6 @@ class MyTestCase(unittest.TestCase):
             if isinstance(pos, int):
                 self.assertGreater(test_text.find(str(pos)), -1)
         self.assertRegex(test_text, r'карточка игрока')
-
 
     def test_player_ask_for_barrel_and_winner(self):
 

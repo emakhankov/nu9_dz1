@@ -7,9 +7,13 @@ class Player:
         self.name = name
         self.card = Card()
 
+    def card_str(self):
+
+        return f'Карточка игрока: {self.name}\n{self.card}'
+
     def print_card(self):
-        print('Карточка игрока:', self.name)
-        self.card.print_card()
+
+        print(self.card_str())
 
     def ask_for_barrel(self, barrel, delegate=None):
 
@@ -19,6 +23,20 @@ class Player:
     def is_winner(self):
 
         return not self.card.amount_num()
+
+    def __str__(self):
+
+        self.card_str()
+
+    def __eq__(self, other):
+
+        if type(self) == type(other):
+            return self.name == other.name
+        return False
+
+    def __ne__(self, other):
+
+        return not __eq__(other)
 
 
 class HumanPlayer(Player):
